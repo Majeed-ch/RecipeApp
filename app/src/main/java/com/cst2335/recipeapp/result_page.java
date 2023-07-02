@@ -116,10 +116,6 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
 
         // this is to react on clicking on any list item, it should take us to the container activity that loads RecipePage fragment
         resultListView.setOnItemClickListener( (list, view, position, id) -> {
-            // a toast message with the name of the meal clicked
-            Toast.makeText(this,
-                    getString(R.string.recipeFor) +" "+myAdapter.getItem(position).getMealName(),
-                        Toast.LENGTH_LONG).show();
             // name of the meal clicked in a bundle to be passed to a fragment
             Bundle fragmentData =new Bundle();
             fragmentData.putString("idMeal", myAdapter.getItem(position).getIdMeal());
@@ -299,32 +295,25 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        String message = null;
         //Look at your menu XML file. Put a case for every id in that file:
         switch(item.getItemId())
         {
             //what to do when the menu item is selected:
             case R.id.home_item:
-                message = getString(R.string.homeItem);
                 Intent i = new Intent (getApplicationContext(), MainActivity.class);
                 startActivity(i);
                 break;
             case R.id.cook_item:
-                message = getString(R.string.cookItem);
                 // this will stop the activity and start it again, instead of starting
                 // a new activity over the existent one.
                 this.finish();
                 this.startActivity(getIntent());
                 break;
             case R.id.favourites_item:
-                message = getString(R.string.favoriteItem);
                 Intent iii = new Intent (getApplicationContext(), Favourites.class);
                 startActivity(iii);
                 break;
 
-        }
-        if ( message != null ) {
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         }
         return true;
     }

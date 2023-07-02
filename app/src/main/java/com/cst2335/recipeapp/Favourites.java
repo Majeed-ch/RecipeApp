@@ -115,11 +115,6 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
             dialogBuilder.setTitle(R.string.makeChoice)
                     .setMessage(R.string.detailsOrRemove)
                             .setPositiveButton(R.string.seeDetails, (click, arg) ->{
-                                // a toast message with the name of the meal clicked
-                                Toast.makeText(this,
-                                        "Recipe for "+myAdapter.getItem(position).getMealName(),
-                                        Toast.LENGTH_SHORT).show();
-
                                 // name of the meal clicked in a bundle to be passed to a fragment
                                 Bundle fragmentData =new Bundle();
                                 fragmentData.putString("idMeal", theMealID);
@@ -128,13 +123,16 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
                                 recipeFrag.putExtras(fragmentData);
                                 startActivity(recipeFrag);
                             })
-                    .setNegativeButton(R.string.removeItem, (click, arg)->{
-                        detailsList.remove(position);
-                        myAdapter.notifyDataSetChanged();
-                        theDatabase.delete(MyOpenHelper.TABLE_NAME, "_id=?",
-                                new String[]{theMealID});
+                            .setNegativeButton(R.string.removeItem, (click, arg)->{
+                                Toast.makeText(this,
+                                        R.string.removeFavourite,
+                                        Toast.LENGTH_SHORT).show();
+                                detailsList.remove(position);
+                                myAdapter.notifyDataSetChanged();
+                                theDatabase.delete(MyOpenHelper.TABLE_NAME, "_id=?",
+                                        new String[]{theMealID});
 
-                    })
+                            })
                     .create().show();
 
         });
@@ -151,32 +149,25 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        String message = null;
         //Look at your menu XML file. Put a case for every id in that file:
         switch(item.getItemId())
         {
             //what to do when the menu item is selected:
             case R.id.home_item:
-                message = getString(R.string.homeItem);
                 Intent i = new Intent (getApplicationContext(), MainActivity.class);
                 startActivity(i);
                 break;
             case R.id.cook_item:
-                message = getString(R.string.cookItem);
                 Intent ii = new Intent (getApplicationContext(), result_page.class);
                 startActivity(ii);
                 break;
             case R.id.favourites_item:
-                message = getString(R.string.favoriteItem);
                 // this will stop the activity and start it again, instead of starting
                 // a new activity over the existent one.
                 this.finish();
                 this.startActivity(getIntent());
                 break;
 
-        }
-        if ( message != null ) {
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         }
         return true;
     }

@@ -190,30 +190,23 @@ public class RecipePage extends Fragment implements NavigationView.OnNavigationI
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        String message = null;
         //Look at your menu XML file. Put a case for every id in that file:
         switch(item.getItemId())
         {
             //what to do when the menu item is selected:
             case R.id.home_item:
-                message = getString(R.string.homeItem);
                 Intent i = new Intent (getActivity(), MainActivity.class);
                 startActivity(i);
                 break;
             case R.id.cook_item:
-                message = getString(R.string.cookItem);
                 Intent ii = new Intent (getActivity(), result_page.class);
                 startActivity(ii);
                 break;
             case R.id.favourites_item:
-                message = getString(R.string.favoriteItem);
                 Intent iii = new Intent (getActivity(), Favourites.class);
                 startActivity(iii);
                 break;
 
-        }
-        if ( message != null ) {
-            Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
         }
         return true;
     }

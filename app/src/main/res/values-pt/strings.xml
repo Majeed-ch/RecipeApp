@@ -37,4 +37,5 @@
     <string name="detailsOrRemove">Você deseja remover os detalhes ou remover dos favoritos</string>
     <string name="seeDetails">Ver detalhes</string>
     <string name="removeItem">Remover</string>
+    <string name="removeFavourite">Receita removida dos seus favoritos</string>
 </resources>
