@@ -33,8 +33,8 @@
 
             <TextView
                 android:id="@+id/tv_meal_name_fav"
-                android:layout_width="315dp"
-                android:layout_height="58dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-black"
                 android:maxHeight="60dp"
                 android:text="Meal Name Meal Name Meal Name Meal Name Meal Name"
@@ -43,7 +43,6 @@
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

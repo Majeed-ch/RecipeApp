@@ -9,18 +9,16 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -32,7 +30,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     SharedPreferences sp;
     private static final String SP_NAME = "myPref";
-    EditText et_area;
+    EditText etSearch;
+    Button searchButton;
     ImageView imageView;
     Toolbar myToolbar;
     DrawerLayout drawer;
@@ -71,14 +70,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         randomImages.add(R.drawable.p6);
         randomImages.add(R.drawable.cooking_image);
 
+        searchButton = findViewById(R.id.resultPageBtn);
 
-
-        et_area = findViewById(R.id.et_area);
+        etSearch = findViewById(R.id.et_area);
         imageView = findViewById(R.id.ImgRandom);
 
         // getting the shared preferences and setting it in the search box
         sp = getSharedPreferences(SP_NAME, MODE_PRIVATE);
-        et_area.setText(sp.getString("area", ""));
+        etSearch.setText(sp.getString("area", ""));
+
+        // adding action to the edit text to search when enter key is pressed
+        etSearch.setOnEditorActionListener((textView, actionId, keyEvent) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                // Perform the desired action, clicking on the search button
+                searchButton.performClick();
+                return true; // Return true to indicate that the action is handled
+            }
+            return false;
+        });
 
         // setting a random image form the images array in the header image view
         Random random = new Random();
@@ -101,14 +110,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-        findViewById(R.id.resultPageBtn).setOnClickListener((click) ->{
+        searchButton.setOnClickListener((click) ->{
 
             SharedPreferences.Editor editor = sp.edit();
-            editor.putString("area", et_area.getText().toString()).apply();
+            editor.putString("area", etSearch.getText().toString()).apply();
 
             Intent goToResult = new Intent(MainActivity.this, result_page.class);
 
-            goToResult.putExtra("area", et_area.getText().toString());
+            goToResult.putExtra("area", etSearch.getText().toString());
             startActivity(goToResult);
         });
 

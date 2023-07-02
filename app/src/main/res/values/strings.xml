@@ -37,4 +37,6 @@
     <string name="removeItem">Remove</string>
     <string name="search_example">eg. canadian / french / italian / greek</string>
     <string name="removeFavourite">Recipe removed from your favourites</string>
+    <string name="noSearchResults">Sorry we didn\'t find any recipes for the searched cuisine. Try to search again.</string>
+    <string name="emptyFavouritesList">Your favourites list is empty :(</string>
 </resources>

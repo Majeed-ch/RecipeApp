@@ -17,8 +17,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:subtitle="Abdul Majeed 1.0"
-        app:subtitleTextColor="@color/design_default_color_background"
         app:title="@string/subtitleMajeed"
         app:titleTextColor="@color/design_default_color_background" />
 
@@ -32,18 +30,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:context=".result_page">
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fab"
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:clickable="true"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:srcCompat="@android:drawable/ic_menu_help"
-                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <ProgressBar
                     android:id="@+id/SR_progressbar"

@@ -13,10 +13,8 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:subtitle="Caner Altun 1.0"
         app:title="@string/subtitleCaner"
-        app:titleTextColor="@color/design_default_color_background"
-        app:subtitleTextColor="@color/design_default_color_background"/>
+        app:titleTextColor="@color/design_default_color_background"/>
 
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -24,14 +22,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:openDrawer="start">
+
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" />
 
-
-
-        </ListView>
+        <include layout="@layout/empty_list_layout" />
 
         <ProgressBar
             android:id="@+id/progressbar"

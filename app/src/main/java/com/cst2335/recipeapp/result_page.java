@@ -31,7 +31,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.cst2335.recipeapp.model.Meals;
 import com.cst2335.recipeapp.model.MyOpenHelper;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
@@ -102,17 +101,6 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
         fetch = new JsonFetcher();
         fetch.execute(api);
 
-
-
-        // FAB when clicked will show AlertDialog with "help" instructions on how to use the layout
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener( clickFab -> {
-            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-            dialogBuilder.setTitle(R.string.help)
-                    .setMessage(R.string.search_result_help)
-                    .setNegativeButton(getString(R.string.close), (click, arg) -> {})
-                    .create().show();
-        }); //end fab onClick
 
         // this is to react on clicking on any list item, it should take us to the container activity that loads RecipePage fragment
         resultListView.setOnItemClickListener( (list, view, position, id) -> {
@@ -239,18 +227,24 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
             // after the doInBackground is done we make the progressbar invisible
             progressBar.setVisibility(View.INVISIBLE);
 
+            assert s != null;
             // in case the data was not fetched
-            if( s != null && s.equalsIgnoreCase("Data not fetched") ) {
+            if( s.equalsIgnoreCase("Data not fetched") ) {
                 // show alert dialog with an error message
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
                 dialogBuilder.setTitle(R.string.help)
                         .setMessage(R.string.not_fetched)
-                        .setNegativeButton("Close", (click, arg) -> {})
+                        .setNegativeButton("Close", (click, arg) -> {finish();})
                         .create().show();
                 Log.e("json", "Data is not fetched");
-            }
-            // or if it was fetched, do the Json parsing
-            else {
+            } else if ( s.contains("null") ) { // in case no results found
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+                dialogBuilder.setTitle(R.string.help)
+                        .setMessage(R.string.noSearchResults)
+                        .setNegativeButton("Close", (click, arg) -> {finish();})
+                        .create().show();
+                Log.e("TAG", "onPostExecute: search returned null" );
+            }else { // or if it was fetched and has result, do the Json parsing
                 try {
                     // convert the string we built to JSON
                     JSONObject jObject = new JSONObject(s);

@@ -38,4 +38,6 @@
     <string name="seeDetails">Ver detalhes</string>
     <string name="removeItem">Remover</string>
     <string name="removeFavourite">Receita removida dos seus favoritos</string>
+    <string name="noSearchResults">Desculpe, não encontramos nenhuma receita para a culinária pesquisada. Tente pesquisar novamente.</string>
+    <string name="emptyFavouritesList">A sua lista de favoritos está vazia :(</string>
 </resources>
