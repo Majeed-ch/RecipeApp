@@ -43,14 +43,10 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
 //---
     MyOpenHelper myOpener;
     SQLiteDatabase theDatabase;
-
-    //MyListAdapter myAdapter;
-   // Button btn;
     ListView listView;
     MyListAdapter myAdapter;
-    //ListView resultListView;
     ArrayList<Meals> detailsList = new ArrayList<>(); //Detail object Array to store info of the list item
-    TextView recipeName; //text view to set its text
+    TextView recipeName, emptyListTV; //text view to set its text
     ImageView thumbnail;
     String mealName, mealThumb, idMeal, area;
     ProgressBar progressBar;
@@ -61,6 +57,7 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourites);
 
+        emptyListTV = findViewById(R.id.tv_empty_list);
         progressBar = findViewById(R.id.progressbar);
         progressBar.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.INVISIBLE);
@@ -71,9 +68,9 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
 
         Cursor results = theDatabase.rawQuery( "Select * from " + MyOpenHelper.TABLE_NAME + ";", null );//no arguments to the query
 
-
         listView = findViewById(R.id.listView);
         listView.setAdapter(myAdapter = new MyListAdapter());
+
 
         //Convert column names to indices:
         int idIndex = results.getColumnIndex( MyOpenHelper.COL_ID );
@@ -90,7 +87,19 @@ public class Favourites extends AppCompatActivity implements NavigationView.OnNa
             detailsList.add(new Meals(id, mealName, mealImage));
         }
         myAdapter.notifyDataSetChanged();
+        
+        // Remove dividers between list items
+        listView.setDivider(null);
+        listView.setDividerHeight(0);
 
+        // show text in the view if the favourites list is empty
+        if (detailsList.isEmpty()) {
+            emptyListTV.setVisibility(View.VISIBLE);
+            listView.setVisibility(View.GONE);
+        } else {
+            emptyListTV.setVisibility(View.GONE);
+            listView.setVisibility(View.VISIBLE);
+        }
 
 
 

@@ -227,18 +227,24 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
             // after the doInBackground is done we make the progressbar invisible
             progressBar.setVisibility(View.INVISIBLE);
 
+            assert s != null;
             // in case the data was not fetched
-            if( s != null && s.equalsIgnoreCase("Data not fetched") ) {
+            if( s.equalsIgnoreCase("Data not fetched") ) {
                 // show alert dialog with an error message
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
                 dialogBuilder.setTitle(R.string.help)
                         .setMessage(R.string.not_fetched)
-                        .setNegativeButton("Close", (click, arg) -> {})
+                        .setNegativeButton("Close", (click, arg) -> {finish();})
                         .create().show();
                 Log.e("json", "Data is not fetched");
-            }
-            // or if it was fetched, do the Json parsing
-            else {
+            } else if ( s.contains("null") ) { // in case no results found
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+                dialogBuilder.setTitle(R.string.help)
+                        .setMessage(R.string.noSearchResults)
+                        .setNegativeButton("Close", (click, arg) -> {finish();})
+                        .create().show();
+                Log.e("TAG", "onPostExecute: search returned null" );
+            }else { // or if it was fetched and has result, do the Json parsing
                 try {
                     // convert the string we built to JSON
                     JSONObject jObject = new JSONObject(s);

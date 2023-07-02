@@ -22,14 +22,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:openDrawer="start">
+
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" />
 
-
-
-        </ListView>
+        <include layout="@layout/empty_list_layout" />
 
         <ProgressBar
             android:id="@+id/progressbar"
