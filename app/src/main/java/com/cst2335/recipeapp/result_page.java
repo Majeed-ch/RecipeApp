@@ -31,7 +31,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.cst2335.recipeapp.model.Meals;
 import com.cst2335.recipeapp.model.MyOpenHelper;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
@@ -102,17 +101,6 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
         fetch = new JsonFetcher();
         fetch.execute(api);
 
-
-
-        // FAB when clicked will show AlertDialog with "help" instructions on how to use the layout
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener( clickFab -> {
-            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-            dialogBuilder.setTitle(R.string.help)
-                    .setMessage(R.string.search_result_help)
-                    .setNegativeButton(getString(R.string.close), (click, arg) -> {})
-                    .create().show();
-        }); //end fab onClick
 
         // this is to react on clicking on any list item, it should take us to the container activity that loads RecipePage fragment
         resultListView.setOnItemClickListener( (list, view, position, id) -> {

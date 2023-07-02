@@ -20,7 +20,6 @@ import android.content.SharedPreferences;
 
 import com.bumptech.glide.Glide;
 import com.cst2335.recipeapp.model.MyOpenHelper;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -150,17 +149,6 @@ public class RecipePage extends Fragment implements NavigationView.OnNavigationI
 
 
         });
-
-        // FAB when clicked will show AlertDialog with "help" instructions on how to use the layout
-        FloatingActionButton fab = recipePage.findViewById(R.id.fab);
-        fab.setOnClickListener( clickFab -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            // TODO: change the message of the help to show instructions of how to use this activity
-            builder.setTitle(R.string.help)
-                    .setMessage(R.string.search_result_help)
-                    .setNegativeButton(getString(R.string.close), (click, arg) -> {})
-                    .create().show();
-        }); //end fab onClick
 
 
         progressBar = recipePage.findViewById(R.id.progressBar);
